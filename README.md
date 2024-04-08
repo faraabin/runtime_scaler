@@ -75,5 +75,4 @@ git clone <ssh code>
 دقت اجرای زمان بندی ها بستگی به اختلاف مقیاس زمان بندی های مورد نیاز و زمان اجرای عنصر اجرایی مادر دارد.
 
 ## مطالب مرتبط
-- [ماژول runtime_scaler](https://github.com/faraabin/runtime_scaler)
 - [ماژول کرونو](https://github.com/faraabin/chrono)

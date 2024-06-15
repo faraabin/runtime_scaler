@@ -203,6 +203,7 @@ extern "C" {
     }\
     if((fChrono_IsTimeout((chrono_)) == true) && (interval_ != 0)) {\
         uint32_t name_##_elapsed##ts_ = fChrono_Elapsed##ts_((chrono_));\
+        (void)(name_##_elapsed##ts_);\
         fChrono_StartTimeout##ts_((chrono_), (interval_));
 
 /** @defgroup RUN_EVERY_US Macros with microsecond time scale

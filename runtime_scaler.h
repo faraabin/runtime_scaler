@@ -49,7 +49,7 @@
     //Reset RUN_ONCE variable status
     RUN_ONCE_RESET_(test_once);
 
-    while(true)
+    while(TRUE)
     {
       RUN_ONCE_(test_once)
       {
@@ -97,7 +97,7 @@
   int main(void)
   {
 
-    while(true)
+    while(TRUE)
     {
       //User code to run every cycle
       //...
@@ -157,7 +157,7 @@ extern "C" {
  * 
  * @param name_ Given name to the RUN_ONCE variable.
  */
-#define RUN_ONCE_DEF_(name_) bool __run_once_##name_##__ = true
+#define RUN_ONCE_DEF_(name_) (bool8_t __run_once_##name_##__ = TRUE)
 
 /**
  * @brief Resets the state of RUN_ONCE.
@@ -166,7 +166,7 @@ extern "C" {
  * 
  * @param name_ Name of the RUN_ONCE variable.
  */
-#define RUN_ONCE_RESET_(name_) __run_once_##name_##__ = true
+#define RUN_ONCE_RESET_(name_) (__run_once_##name_##__ = TRUE)
 
 /**
  * @brief This macro is used to mark the start of the code block for using RUN_ONCE.
@@ -176,8 +176,8 @@ extern "C" {
  * @param name_ Name of the RUN_ONCE variable.
  */
 #define RUN_ONCE_(name_) \
-  if(__run_once_##name_##__ == true) {\
-    __run_once_##name_##__ = false;
+  if(__run_once_##name_##__ == TRUE) {\
+    __run_once_##name_##__ = FALSE;
 
 /** @} */ //End of RUN_FIRST
 
@@ -195,13 +195,13 @@ extern "C" {
  * @param interval_ The time interval for executing the code block.
  * @param chrono_ A pointer to the chrono object.
  * @param ts_ The time sample of the RUN_EVERY object. Use Us for microseconds, Ms for milliseconds, and S for seconds.
- * @param force_ If true, RUN_EVERY will execute the code block immediately; if false, it will only initialize its chrono object and run the code block in the next interval.
+ * @param force_ If TRUE, RUN_EVERY will execute the code block immediately; if FALSE, it will only initialize its chrono object and run the code block in the next interval.
  */
 #define RUN_EVERY_BASE_(name_, interval_, chrono_, ts_, force_) \
-    if((chrono_)->_run == false) {\
+    if((chrono_)->_run == FALSE) {\
       fChrono_StartTimeout##ts_((chrono_), force_ ? 0 : (interval_));\
     }\
-    if((fChrono_IsTimeout((chrono_)) == true) && (interval_ != 0)) {\
+    if((fChrono_IsTimeout((chrono_)) == TRUE) && (interval_ != 0)) {\
         uint32_t name_##_elapsed##ts_ = fChrono_Elapsed##ts_((chrono_));\
         (void)(name_##_elapsed##ts_);\
         fChrono_StartTimeout##ts_((chrono_), (interval_));
@@ -228,7 +228,7 @@ extern "C" {
  * @param intervalUs_ The time interval for running the code block in microseconds.
  * 
  */
-#define RUN_EVERY_US_OBJ_(name_, chrono_, intervalUs_) RUN_EVERY_BASE_(name_, intervalUs_, chrono_, Us, false)
+#define RUN_EVERY_US_OBJ_(name_, chrono_, intervalUs_) RUN_EVERY_BASE_(name_, intervalUs_, chrono_, Us, FALSE)
 
 /**
  * @brief Objective RUN_EVERY macro with microsecond time interval in FORCE mode. Marks the start of the code block.
@@ -246,7 +246,7 @@ extern "C" {
  * @param intervalUs_ The time interval for running the code block in microseconds.
  * 
  */
-#define RUN_EVERY_US_OBJ_FORCE_(name_, chrono_, intervalUs_) RUN_EVERY_BASE_(name_, intervalUs_, chrono_, Us, true)
+#define RUN_EVERY_US_OBJ_FORCE_(name_, chrono_, intervalUs_) RUN_EVERY_BASE_(name_, intervalUs_, chrono_, Us, TRUE)
 
 /**
  * @brief Static RUN_EVERY macro with microsecond time interval. Marks the start of the code block.
@@ -262,7 +262,7 @@ extern "C" {
  * 
  */
 #define RUN_EVERY_US_(name_, intervalUs_) \
-    static sChrono __run_every_us_##name_##__ = {false, 0, 0};\
+    static sChrono __run_every_us_##name_##__ = {FALSE, 0, 0};\
     RUN_EVERY_US_OBJ_(name_, &__run_every_us_##name_##__, intervalUs_)
 
 /**
@@ -278,7 +278,7 @@ extern "C" {
  * 
  */
 #define RUN_EVERY_US_FORCE_(name_, intervalUs_) \
-    static sChrono __run_every_us_##name_##__ = {false, 0, 0};\
+    static sChrono __run_every_us_##name_##__ = {FALSE, 0, 0};\
     RUN_EVERY_US_OBJ_FORCE_(name_, &__run_every_us_##name_##__, intervalUs_)
 
 /** @} */ //End of RUN_EVERY_US
@@ -305,7 +305,7 @@ extern "C" {
  * @param intervalUs_ The time interval for running the code block in milliseconds.
  * 
  */
-#define RUN_EVERY_MS_OBJ_(name_, chrono_, intervalMs_) RUN_EVERY_BASE_(name_, intervalMs_, chrono_, Ms, false)
+#define RUN_EVERY_MS_OBJ_(name_, chrono_, intervalMs_) RUN_EVERY_BASE_(name_, intervalMs_, chrono_, Ms, FALSE)
 
 /**
  * @brief Objective RUN_EVERY macro with millisecond time interval in FORCE mode. Marks the start of the code block.
@@ -323,7 +323,7 @@ extern "C" {
  * @param intervalUs_ The time interval for running the code block in milliseconds.
  * 
  */
-#define RUN_EVERY_MS_OBJ_FORCE_(name_, chrono_, intervalMs_) RUN_EVERY_BASE_(intervalMs_, chrono_, Ms, true)
+#define RUN_EVERY_MS_OBJ_FORCE_(name_, chrono_, intervalMs_) RUN_EVERY_BASE_(intervalMs_, chrono_, Ms, TRUE)
 
 /**
  * @brief Static RUN_EVERY macro with millisecond time interval. Marks the start of the code block.
@@ -339,7 +339,7 @@ extern "C" {
  * 
  */
 #define RUN_EVERY_MS_(name_, intervalMs_) \
-    static sChrono __run_every_ms_##name_##__ = {false, 0, 0};\
+    static sChrono __run_every_ms_##name_##__ = {FALSE, 0, 0};\
     RUN_EVERY_MS_OBJ_(name_, &__run_every_ms_##name_##__, intervalMs_)
 
 /**
@@ -355,7 +355,7 @@ extern "C" {
  * 
  */
 #define RUN_EVERY_MS_FORCE_(name_, intervalMs_) \
-    static sChrono __run_every_ms_##name_##__ = {false, 0, 0};\
+    static sChrono __run_every_ms_##name_##__ = {FALSE, 0, 0};\
     RUN_EVERY_MS_OBJ_FORCE_(name_, &__run_every_ms_##name_##__, intervalMs_)
 
 /** @} */ //End of RUN_EVERY_MS
@@ -382,7 +382,7 @@ extern "C" {
  * @param intervalUs_ The time interval for running the code block in seconds.
  * 
  */
-#define RUN_EVERY_S_OBJ_(name_, chrono_, intervalS_) RUN_EVERY_BASE_(name_, intervalS_, chrono_, S, false)
+#define RUN_EVERY_S_OBJ_(name_, chrono_, intervalS_) RUN_EVERY_BASE_(name_, intervalS_, chrono_, S, FALSE)
 
 /**
  * @brief Objective RUN_EVERY macro with second time interval in FORCE mode. Marks the start of the code block.
@@ -400,7 +400,7 @@ extern "C" {
  * @param intervalUs_ The time interval for running the code block in seconds.
  * 
  */
-#define RUN_EVERY_S_OBJ_FORCE_(name_, chrono_, intervalS_) RUN_EVERY_BASE_(name_, intervalS_, chrono_, S, true)
+#define RUN_EVERY_S_OBJ_FORCE_(name_, chrono_, intervalS_) RUN_EVERY_BASE_(name_, intervalS_, chrono_, S, TRUE)
 
 /**
  * @brief Static RUN_EVERY macro with second time interval. Marks the start of the code block.
@@ -416,7 +416,7 @@ extern "C" {
  * 
  */
 #define RUN_EVERY_S_(name_, intervalS_) \
-    static sChrono __run_every_s_##name_##__ = {false, 0, 0};\
+    static sChrono __run_every_s_##name_##__ = {FALSE, 0, 0};\
     RUN_EVERY_S_OBJ_(name_, &__run_every_s_##name_##__, intervalS_)
 
 /**
@@ -432,7 +432,7 @@ extern "C" {
  * 
  */
 #define RUN_EVERY_S_FORCE_(name_, intervalS_) \
-    static sChrono __run_every_s_##name_##__ = {false, 0, 0};\
+    static sChrono __run_every_s_##name_##__ = {FALSE, 0, 0};\
     RUN_EVERY_S_OBJ_FORCE_(name_, &__run_every_s_##name_##__, intervalS_)
 
 /** @} */ //End of RUN_EVERY_S
@@ -450,7 +450,7 @@ extern "C" {
  * 
  * @param qty_ The value that specifies how many times the code block will be executed.
  * @param cnt_ The name of the counter variable that holds how many times the program has reached the code block.
- * @param force_ If true, RUN_EVERY_QTY will execute the code block immediately; if false, it will only initialize its chrono object and run the code block in the next interval.
+ * @param force_ If TRUE, RUN_EVERY_QTY will execute the code block immediately; if FALSE, it will only initialize its chrono object and run the code block in the next interval.
  */
 #define RUN_EVERY_QTY_BASE_(qty_, cnt_, force_) \
   (cnt_)++;\
@@ -475,7 +475,7 @@ extern "C" {
  * @param qty_ The value that specifies how many times the code block will be executed.
  * @param cnt_ The name of the counter variable.
  */
-#define RUN_EVERY_QTY_OBJ_(name_, qty_, cnt_) RUN_EVERY_QTY_BASE_(qty_, cnt_, false)
+#define RUN_EVERY_QTY_OBJ_(name_, qty_, cnt_) RUN_EVERY_QTY_BASE_(qty_, cnt_, FALSE)
 
 /**
  * @brief Objective RUN_EVERY_QTY macro in FORCE mode. Marks the start of the code block.
@@ -492,7 +492,7 @@ extern "C" {
  * @param qty_ The value that specifies how many times the code block will be executed.
  * @param cnt_ The name of the counter variable.
  */
-#define RUN_EVERY_QTY_OBJ_FORCE_(name_, qty_, cnt_) RUN_EVERY_QTY_BASE_(qty_, cnt_, true)
+#define RUN_EVERY_QTY_OBJ_FORCE_(name_, qty_, cnt_) RUN_EVERY_QTY_BASE_(qty_, cnt_, TRUE)
 
 /**
  * @brief Static RUN_EVERY_QTY macro. Marks the start of the code block.

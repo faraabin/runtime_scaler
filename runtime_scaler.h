@@ -134,8 +134,8 @@
   */
 
 /* Define to prevent recursive inclusion -------------------------------------*/
-#ifndef __runtime_scaler_H
-#define __runtime_scaler_H
+#ifndef RUNTIME_SCALER_H
+#define RUNTIME_SCALER_H
 
 #ifdef __cplusplus
 extern "C" {
@@ -157,7 +157,7 @@ extern "C" {
  * 
  * @param name_ Given name to the RUN_ONCE variable.
  */
-#define RUN_ONCE_DEF_(name_) (bool8_t __run_once_##name_##__ = TRUE)
+#define RUN_ONCE_DEF_(name_) (bool_t __run_once_##name_##__ = TRUE)
 
 /**
  * @brief Resets the state of RUN_ONCE.
@@ -539,6 +539,6 @@ extern "C" {
 }
 #endif
 
-#endif /* __RUNTIME_SCALER_H */
+#endif /* RUNTIME_SCALER_H */
 
 /************************ © COPYRIGHT FaraabinCo *****END OF FILE****/

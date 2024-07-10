@@ -202,7 +202,7 @@ extern "C" {
       fChrono_StartTimeout##ts_((chrono_), force_ ? 0 : (interval_));\
     }\
     if((fChrono_IsTimeout((chrono_)) == TRUE) && (interval_ != 0)) {\
-        uint32_t name_##_elapsed##ts_ = fChrono_Elapsed##ts_((chrono_));\
+        time##ts_##_t name_##_elapsed##ts_ = fChrono_Elapsed##ts_((chrono_));\
         (void)(name_##_elapsed##ts_);\
         fChrono_StartTimeout##ts_((chrono_), (interval_));
 

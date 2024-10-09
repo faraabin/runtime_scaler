@@ -323,7 +323,7 @@ extern "C" {
  * @param intervalUs_ The time interval for running the code block in milliseconds.
  * 
  */
-#define RUN_EVERY_MS_OBJ_FORCE_(name_, chrono_, intervalMs_) RUN_EVERY_BASE_(intervalMs_, chrono_, Ms, TRUE)
+#define RUN_EVERY_MS_OBJ_FORCE_(name_, chrono_, intervalMs_) RUN_EVERY_BASE_(name_, intervalMs_, chrono_, Ms, TRUE)
 
 /**
  * @brief Static RUN_EVERY macro with millisecond time interval. Marks the start of the code block.
@@ -471,11 +471,10 @@ extern "C" {
  * @note This macro does not execute user code during the first encounter of the code block. User code will be executed in the subsequent intervals.
  * @note It is essential to mark the end of the code block using the RUN_END_ macro.
  * 
- * @param name_ Name of the code block.
  * @param qty_ The value that specifies how many times the code block will be executed.
  * @param cnt_ The name of the counter variable.
  */
-#define RUN_EVERY_QTY_OBJ_(name_, qty_, cnt_) RUN_EVERY_QTY_BASE_(qty_, cnt_, FALSE)
+#define RUN_EVERY_QTY_OBJ_(qty_, cnt_) RUN_EVERY_QTY_BASE_(qty_, cnt_, FALSE)
 
 /**
  * @brief Objective RUN_EVERY_QTY macro in FORCE mode. Marks the start of the code block.
@@ -488,11 +487,10 @@ extern "C" {
  * @note This macro initializes the RUN_EVERY_QTY and also forces it to run the user code during the first encounter.
  * @note It is essential to mark the end of the code block using the RUN_END_ macro.
  * 
- * @param name_ The name of the code block.
  * @param qty_ The value that specifies how many times the code block will be executed.
  * @param cnt_ The name of the counter variable.
  */
-#define RUN_EVERY_QTY_OBJ_FORCE_(name_, qty_, cnt_) RUN_EVERY_QTY_BASE_(qty_, cnt_, TRUE)
+#define RUN_EVERY_QTY_OBJ_FORCE_(qty_, cnt_) RUN_EVERY_QTY_BASE_(qty_, cnt_, TRUE)
 
 /**
  * @brief Static RUN_EVERY_QTY macro. Marks the start of the code block.

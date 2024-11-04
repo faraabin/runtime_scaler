@@ -157,7 +157,7 @@ extern "C" {
  * 
  * @param name_ Given name to the RUN_ONCE variable.
  */
-#define RUN_ONCE_DEF_(name_) (bool_t __run_once_##name_##__ = TRUE)
+#define RUN_ONCE_DEF_(name_) bool_t __run_once_##name_##__ = TRUE
 
 /**
  * @brief Resets the state of RUN_ONCE.
@@ -166,7 +166,7 @@ extern "C" {
  * 
  * @param name_ Name of the RUN_ONCE variable.
  */
-#define RUN_ONCE_RESET_(name_) (__run_once_##name_##__ = TRUE)
+#define RUN_ONCE_RESET_(name_) __run_once_##name_##__ = TRUE
 
 /**
  * @brief This macro is used to mark the start of the code block for using RUN_ONCE.

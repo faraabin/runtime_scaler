@@ -526,6 +526,30 @@ extern "C" {
 
 /** @} */ //End of RUN_EVERY
 
+/**
+ * @brief Static RUN_AFTER_QTY macro. Marks the start of the code block.
+ * 
+ * @note Use this macro when you don't want to run code first n run.
+ * 
+ * @note It is essential to mark the end of the code block using the RUN_END_ macro.
+ * 
+ * @param name_ The name of the code block.
+ * @param qty_ The value that specifies how many times the code block will be neglected.
+ */
+#define RUN_AFTER_QTY_(name_, qty_) \
+  static uint32_t __run_after_qty_##name_##__ = 0;\
+  static bool _is_run_after_qty_##name_##__ = false;\
+  if(!_is_run_after_qty_##name_##__) {\
+    __run_after_qty_##name_##__++;\
+    if(__run_after_qty_##name_##__++ >= (qty_)) {\
+      __run_after_qty_##name_##__ = 0;\
+      _is_run_after_qty_##name_##__ = true;\
+    }\
+  } else {
+
+#define RUN_AFTER_QTY_RESET_(name_) \
+  _is_run_after_qty_##name_##__ = false
+
 #define RUN_END_ }
     
 /* Exported types ------------------------------------------------------------*/

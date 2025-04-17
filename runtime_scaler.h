@@ -262,7 +262,7 @@ extern "C" {
  * 
  */
 #define RUN_EVERY_US_(name_, intervalUs_) \
-    static sChrono __run_every_us_##name_##__ = {FALSE, 0, 0};\
+    static sChrono __run_every_us_##name_##__ = {FALSE, 0, 0, 0, FALSE};\
     RUN_EVERY_US_OBJ_(name_, &__run_every_us_##name_##__, intervalUs_)
 
 /**
@@ -278,7 +278,7 @@ extern "C" {
  * 
  */
 #define RUN_EVERY_US_FORCE_(name_, intervalUs_) \
-    static sChrono __run_every_us_##name_##__ = {FALSE, 0, 0};\
+    static sChrono __run_every_us_##name_##__ = {FALSE, 0, 0, 0, FALSE};\
     RUN_EVERY_US_OBJ_FORCE_(name_, &__run_every_us_##name_##__, intervalUs_)
 
 /** @} */ //End of RUN_EVERY_US
@@ -339,7 +339,7 @@ extern "C" {
  * 
  */
 #define RUN_EVERY_MS_(name_, intervalMs_) \
-    static sChrono __run_every_ms_##name_##__ = {FALSE, 0, 0};\
+    static sChrono __run_every_ms_##name_##__ = {FALSE, 0, 0, 0, FALSE};\
     RUN_EVERY_MS_OBJ_(name_, &__run_every_ms_##name_##__, intervalMs_)
 
 /**
@@ -355,7 +355,7 @@ extern "C" {
  * 
  */
 #define RUN_EVERY_MS_FORCE_(name_, intervalMs_) \
-    static sChrono __run_every_ms_##name_##__ = {FALSE, 0, 0};\
+    static sChrono __run_every_ms_##name_##__ = {FALSE, 0, 0, 0, FALSE};\
     RUN_EVERY_MS_OBJ_FORCE_(name_, &__run_every_ms_##name_##__, intervalMs_)
 
 /** @} */ //End of RUN_EVERY_MS
@@ -416,7 +416,7 @@ extern "C" {
  * 
  */
 #define RUN_EVERY_S_(name_, intervalS_) \
-    static sChrono __run_every_s_##name_##__ = {FALSE, 0, 0};\
+    static sChrono __run_every_s_##name_##__ = {FALSE, 0, 0, 0, FALSE};\
     RUN_EVERY_S_OBJ_(name_, &__run_every_s_##name_##__, intervalS_)
 
 /**
@@ -432,7 +432,7 @@ extern "C" {
  * 
  */
 #define RUN_EVERY_S_FORCE_(name_, intervalS_) \
-    static sChrono __run_every_s_##name_##__ = {FALSE, 0, 0};\
+    static sChrono __run_every_s_##name_##__ = {FALSE, 0, 0, 0, FALSE};\
     RUN_EVERY_S_OBJ_FORCE_(name_, &__run_every_s_##name_##__, intervalS_)
 
 /** @} */ //End of RUN_EVERY_S
